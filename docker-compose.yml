@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+    php56:
+        build: ./php56
+        volumes:
+            - $PWD:/opt/php
+        ports:
+            - "81:80"
+        tty: true
+        environment:
+            - TZ=Asia/Tokyo
+        volumes:
+            - $PWD/web:/var/www/html
+        command: httpd -DFOREGROUND
+    php71:
+        build: ./php71
+        environment:
+            - TZ=Asia/Tokyo
+        ports:
+            - "82:80"
+        tty: true
+        volumes:
+            - $PWD/web:/var/www/html
+        command: httpd -DFOREGROUND
