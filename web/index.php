@@ -35,12 +35,16 @@ class DummySession implements \SessionHandlerInterface {
 
 
 function main() {
+    set_error_handler(
+        function ($errno, $errstr, $errfile, $errline) {
+            throw new ErrorException(
+                $errstr, 0, $errno, $errfile, $errline
+            );
+        }
+    );
     session_set_save_handler(new DummySession());
     session_start();
     echo "OK";
 }
 
-
 main();
-
-
